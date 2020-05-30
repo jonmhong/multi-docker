@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "jonhong/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "jonhong/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "jonhong/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "jonhong/multi-nginx",
+            "hostname": "nginx",
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 3050
+                }
+            ],
+            "links": ["client", "server"],
+            "essential": true
+        }
+    ]
+}
